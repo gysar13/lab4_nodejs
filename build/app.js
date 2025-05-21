@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const user_routes_1 = __importDefault(require("./routes/user.routes"));
+const post_routes_1 = __importDefault(require("./routes/post.routes"));
+const comment_routes_1 = __importDefault(require("./routes/comment.routes"));
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use('/', (req, res, next) => {
+    if (req.originalUrl === '/') {
+        res.send('Service is running!');
+        return;
+    }
+    next();
+});
+app.use('/users', user_routes_1.default);
+app.use('/posts', post_routes_1.default);
+app.use('/comments', comment_routes_1.default);
+exports.default = app;
+//# sourceMappingURL=app.js.map
